@@ -3,6 +3,7 @@ from .models import Professor
 from .serializer import ProfessorSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework.generics import ListCreateAPIView
 
 
 @api_view(['GET', 'POST'])
@@ -12,3 +13,6 @@ def listar_professores(request):
         serializer = ProfessorSerializer(queryset, many=True)
     return Response(serializer.data)
         
+class ProfessoresView(ListCreateAPIView):
+    queryset = Professor.objects.all()
+    serializer_class = ProfessorSerializer
